@@ -1,0 +1,10 @@
+<h1>Language information</h1>
+
+<h3>Language: <%= @language.language_name %></h3>
+<br>
+<h3>Words in the language: </h3>
+<h3>
+  <%@language.words.each do |word| %>
+    <li><%= word.word %></li>
+  <%end%>
+</h3>

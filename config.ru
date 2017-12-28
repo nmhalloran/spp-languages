@@ -5,4 +5,7 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
+use LanguagesController
+use SpeakersController
+use WordsController
 run ApplicationController
