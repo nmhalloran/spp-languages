@@ -10,23 +10,35 @@ helpers do
   def is_logged_in?
     !!current_user
   end
-end
 
   def slug
     self.username.downcase.gsub(/[ ]/, "-")
   end
-  
+
   def self.find_by_slug(name)
     self.all.detect do |object|
       object.slug == name
     end
   end
+end
 
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions unless test?
     set :session_secret, "secret"
+  end
+
+  get '/' do
+    !is_logged_in? ? (erb :index) : (redirect to '/speakers/show')
+  end
+
+  get '/login' do
+    is_logged_in? ? (redirect to '/speakers/show') : (erb :'/speakers/login')
+  end
+
+  get '/signup' do
+    is_logged_in? ? (redirect to '/speakers/show') : (erb :'/speakers/signup')
   end
 
 end
