@@ -1,7 +1,8 @@
 class LanguagesController < ApplicationController
 
   get '/languages' do
-
+    @languages = Language.all
+    is_logged_in? ? (erb :'/languages/languages') : (redirect to '/')
   end
 
   get '/languages/new' do

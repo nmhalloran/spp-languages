@@ -37,8 +37,29 @@ end
     is_logged_in? ? (redirect to '/speakers/show') : (erb :'/speakers/login')
   end
 
+  post '/login' do
+    @user = Speaker.find_by(username: params["username"])
+    if @user != nil && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect to "/speakers/show"
+    end
+    erb :'/speakers/login'
+  end
+
   get '/signup' do
     is_logged_in? ? (redirect to '/speakers/show') : (erb :'/speakers/create_speaker')
+  end
+
+  post '/signup' do
+    if params[:username].empty? | params[:email].empty? | params[:password].empty?
+      redirect to "/signup"
+    end
+    @user = Speaker.new(username: params[:username])
+    @user.email = params[:email]
+    @user.password = params[:password]
+    @user.save
+    session[:user_id] = @user.id
+    redirect to "/speakers/show"
   end
 
 end

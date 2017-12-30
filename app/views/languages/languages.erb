@@ -1,0 +1,5 @@
+<h1>Welcome to the Language Chatter Language Page!</h1>
+<h3>Here are the languages currently in the database</h3>
+<% @languages.each do |language| %>
+  <li><%= language.name %></li>
+<%end%>
