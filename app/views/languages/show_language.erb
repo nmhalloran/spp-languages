@@ -4,7 +4,7 @@
 <br>
 <h3>Words in the language: </h3>
 <h3>
-  <%@language.words.each do |word| %>
+  <%@language.words.all.each do |word| %>
     <li><%= word.word %></li>
   <%end%>
 </h3>
