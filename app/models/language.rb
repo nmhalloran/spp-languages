@@ -1,5 +1,5 @@
 class Language < ActiveRecord::Base
-  has_many :speakers
-  has_many :language_words
-  has_many :words, through: :language_words
+  has_many :language_speakers
+  has_many :speakers, through: :language_speakers
+  has_many :words
 end
