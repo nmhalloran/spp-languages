@@ -38,7 +38,7 @@ end
   end
 
   get '/signup' do
-    is_logged_in? ? (redirect to '/speakers/show') : (erb :'/speakers/signup')
+    is_logged_in? ? (redirect to '/speakers/show') : (erb :'/speakers/create_speaker')
   end
 
 end
