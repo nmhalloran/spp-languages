@@ -23,7 +23,9 @@ ActiveRecord::Schema.define(version: 20171227224841) do
   end
 
   create_table "speakers", force: :cascade do |t|
-    t.string "name"
+    t.string "username"
+    t.string "email"
+    t.string "password_digest"
   end
 
   create_table "words", force: :cascade do |t|

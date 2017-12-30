@@ -1,0 +1,8 @@
+<h1>And here is the speakers home page</h1>
+
+<h2>User Name: <%=@user.username%></h2>
+
+<h3>Known Languages:</h3>
+  <%@user.languages.all.each do |language| %>
+    <a href="/languages/show"><%= language.name %></a>
+  <% end %>
