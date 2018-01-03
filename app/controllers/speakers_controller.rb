@@ -19,16 +19,17 @@ class SpeakersController < ApplicationController
   end
 
   get '/speakers/:id/edit' do
-    @user ||= Speaker.find(params[:id])
-    if is_logged_in? && @user.id == session[:user_id]
-      erb :'/speakers/edit_speaker'
-    elsif is_logged_in? && @user.id != session[:user_id]
-      # FLASH MESSAGE "CANNOT EDIT ANOTHER USERS INFORMATION!"
-      redirect to '/'
+    if is_logged_in?
+      @user = Speaker.find(session[:user_id])
+      if params[:id].to_i == session[:user_id]
+        erb :'/speakers/edit_speaker'
+      else
+        # FLASH MESSAGE "CANNOT EDIT ANOTHER USERS INFORMATION!"
+        redirect to '/'
+      end
     else
       redirect to '/'
     end
-
   end
 
 end
