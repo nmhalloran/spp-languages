@@ -11,13 +11,13 @@ helpers do
     !!current_user
   end
 
-  def slug
-    self.username.downcase.gsub(/[ ]/, "-")
+  def slug(name)
+    self.name.downcase.gsub(/[ ]/, "-")
   end
 
   def self.find_by_slug(name)
     self.all.detect do |object|
-      object.slug == name
+      object.slug(name) == name
     end
   end
 end
@@ -60,6 +60,11 @@ end
     @user.save
     session[:user_id] = @user.id
     redirect to "/speakers/show"
+  end
+
+  get '/logout' do
+    session.clear
+    redirect to '/'
   end
 
 end

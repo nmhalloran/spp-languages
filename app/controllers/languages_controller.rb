@@ -1,15 +1,5 @@
 class LanguagesController < ApplicationController
 
-  def slug
-    self.username.downcase.gsub(/[ ]/, "-")
-  end
-
-  def self.find_by_slug(name)
-    self.all.detect do |object|
-      object.slug == name
-    end
-  end
-
   get '/languages' do
     @languages = Language.all
     is_logged_in? ? (erb :'/languages/languages') : (redirect to '/')
