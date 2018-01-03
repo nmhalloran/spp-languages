@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h1>And here is the speakers home page</h1>
 
 <h2>User Name: <%=@user.username%></h2>
