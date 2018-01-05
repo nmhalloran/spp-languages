@@ -41,7 +41,7 @@ class SpeakersController < ApplicationController
     @user = Speaker.find(session[:user_id])
     if @user.languages.include?(Language.find_by(language_name: params[:language_name]))
       flash[:message] = "Already learning language. Please select another."
-      redirect to '/speakers/<%=@user.id%>/edit'
+      redirect to "/speakers/#{@user.id}/edit"
     end
     @user.languages << Language.find_by(language_name: params[:language_name])
     @user.save

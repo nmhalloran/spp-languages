@@ -8,13 +8,16 @@
 
 <h3>Known Languages:</h3>
   <%@user.languages.all.each do |language| %>
-    <li><a href="/languages/<%=language.slug%>"><%= language.language_name %></a></li>
+      <li><a href="/languages/<%=language.slug%>"><%= language.language_name %></a><a href="/words/<%=language.words%>">- Vocabulary: <%=language.words.count%></a></li>
   <% end %>
   <br>
   <%if @user.languages.empty? %>
-    <a href="/speakers/<%=@user.id%>/edit">Click here to add native language</a>
+    <h4><a href="/speakers/<%=@user.id%>/edit">Click here to add native language</a></h4>
+  <%elsif @user.languages.count >= Language.all.count%>
+    <h4>You have accessed all currently available languages. Good job!</h4>
   <%else%>
     <a href="/speakers/<%=@user.id%>/edit">Add/Edit a Speaker's Languages</a>
+    <h4><%= @user.languages.count %>  <%= Language.all.count %></h4>
   <% end %>
   <br></br>
   <a href="/logout">Log Out</a>
