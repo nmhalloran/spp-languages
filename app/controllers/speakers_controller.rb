@@ -29,12 +29,23 @@ class SpeakersController < ApplicationController
       if params[:id].to_i == session[:user_id]
         erb :'/speakers/edit_speaker'
       else
-        # FLASH MESSAGE "CANNOT EDIT ANOTHER USERS INFORMATION!"
+        flash[:message] = "Cannot edit other users' pages."
         redirect to '/'
       end
     else
       redirect to '/'
     end
+  end
+
+  patch '/speakers/:id' do
+    @user = Speaker.find(session[:user_id])
+    if @user.languages.include?(Language.find_by(language_name: params[:language_name]))
+      flash[:message] = "Already learning language. Please select another."
+      redirect to '/speakers/<%=@user.id%>/edit'
+    end
+    @user.languages << Language.find_by(language_name: params[:language_name])
+    @user.save
+    redirect to '/speakers/show'
   end
 
 end

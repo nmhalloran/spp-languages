@@ -1,17 +1,20 @@
-<% if flash.has?(:message) %>
-  <%= flash[:message] %>
-<% end %>
+<h4>
+  <% if flash.has?(:message) %>
+    <%= flash[:message] %>
+  <% end %>
+</h4>
 
-<h1>And here is the speakers home page</h1>
-
-<h2>User Name: <%=@user.username%></h2>
+<h2>Welcome to Language Chatter, <%=@user.username%>!</h2>
 
 <h3>Known Languages:</h3>
   <%@user.languages.all.each do |language| %>
     <li><a href="/languages/<%=language.slug%>"><%= language.language_name %></a></li>
   <% end %>
+  <br>
   <%if @user.languages.empty? %>
-    <a href="/speakers/<%=@user.id%>/edit">No languages. Please add initial language</a>
+    <a href="/speakers/<%=@user.id%>/edit">Click here to add native language</a>
   <%else%>
     <a href="/speakers/<%=@user.id%>/edit">Add/Edit a Speaker's Languages</a>
   <% end %>
+  <br></br>
+  <a href="/logout">Log Out</a>
