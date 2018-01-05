@@ -1,10 +1,10 @@
 <h1>Language information</h1>
 
 <h3>Language: <%= @language.language_name %></h3>
-<br>
 <h3>Words in the language: </h3>
 <h3>
   <%@language.words.all.each do |word| %>
     <li><%= word.word %></li>
   <%end%>
 </h3>
+<a href="/words/new">Add New Word to Language</a>
