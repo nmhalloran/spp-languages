@@ -13,6 +13,9 @@
             <input type="submit" value="Remove Language">
           </form>
           <a href="/speakers/<%=language.slug%>/words">Vocabulary: <%=@user.words.count%></a></li>
+          <form method="get" action="/words/<%= language.slug %>/learn_word">
+            <input type="submit" value="Learn Vocab">
+          </form>
   <% end %>
   <br>
   <%if @user.languages.empty? %>
