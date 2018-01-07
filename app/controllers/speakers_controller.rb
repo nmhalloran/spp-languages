@@ -38,14 +38,35 @@ class SpeakersController < ApplicationController
   end
 
   patch '/speakers/:id' do
-    @user = Speaker.find(session[:user_id])
-    if @user.languages.include?(Language.find_by(language_name: params[:language_name]))
-      flash[:message] = "Already learning language. Please select another."
-      redirect to "/speakers/#{@user.id}/edit"
+    if is_logged_in?
+      @user = Speaker.find(session[:user_id])
+      if @user.languages.include?(Language.find_by(language_name: params[:language_name]))
+        flash[:message] = "Already learning language. Please select another."
+        redirect to "/speakers/#{@user.id}/edit"
+      end
+      @user.languages << Language.find_by(language_name: params[:language_name])
+      @user.save
+      redirect to '/speakers/show'
+    else
+      redirect to '/'
     end
-    @user.languages << Language.find_by(language_name: params[:language_name])
-    @user.save
-    redirect to '/speakers/show'
+  end
+
+  delete '/speakers/:slug/delete' do
+    if is_logged_in?
+      @user = Speaker.find(session[:user_id])
+      @language = Language.find_by_slug(params[:slug])
+      if @user.languages.include?(@language)
+        @user.languages.delete(@language)
+        flash[:message] = "#{@language.language_name} removed from learning list."
+        redirect to '/speakers/show'
+      else
+        flash[:message] = "Language already deleted."
+        redirect to '/speakers/show'
+      end
+    else
+      redirect to '/'
+    end
   end
 
 end

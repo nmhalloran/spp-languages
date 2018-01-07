@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171227224841) do
+ActiveRecord::Schema.define(version: 20180105221552) do
 
   create_table "language_speakers", force: :cascade do |t|
     t.integer "language_id"
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 20171227224841) do
 
   create_table "languages", force: :cascade do |t|
     t.string "language_name"
+  end
+
+  create_table "speaker_words", force: :cascade do |t|
+    t.integer "speaker_id"
+    t.integer "word_id"
   end
 
   create_table "speakers", force: :cascade do |t|

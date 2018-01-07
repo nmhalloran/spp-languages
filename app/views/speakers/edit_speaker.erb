@@ -16,7 +16,7 @@
   <%Language.all.each do |language| %>
     <input type="radio" name="language_name" id="<%=language.language_name%>" value="<%=language.language_name%>" <%='checked' if @user.languages.include?(language)%>><%=language.language_name%></input>
   <%end%>
-  <input type="submit" name="submit" value="sAdd Language">
+  <input type="submit" name="submit" value="Add Language">
 
 </form>
   <br>

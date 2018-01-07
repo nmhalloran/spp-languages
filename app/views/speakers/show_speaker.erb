@@ -1,14 +1,18 @@
-<h4>
-  <% if flash.has?(:message) %>
-    <%= flash[:message] %>
-  <% end %>
-</h4>
+<h1> <% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %> </h1>
+
 
 <h2>Welcome to Language Chatter, <%=@user.username%>!</h2>
 
 <h3>Known Languages:</h3>
-  <%@user.languages.all.each do |language| %>
-      <li><a href="/languages/<%=language.slug%>"><%= language.language_name %></a><a href="/words/<%=language.words%>">- Vocabulary: <%=language.words.count%></a></li>
+  <%@user.languages.uniq.each do |language| %>
+      <li><a href="/languages/<%=language.slug%>"><%= language.language_name %></a>
+          <form method="post" action="/speakers/<%= language.slug %>/delete">
+            <input id="hidden" type="hidden" name="_method" value="delete">
+            <input type="submit" value="Remove Language">
+          </form>
+          <a href="/speakers/<%=language.slug%>/words">Vocabulary: <%=@user.words.count%></a></li>
   <% end %>
   <br>
   <%if @user.languages.empty? %>
